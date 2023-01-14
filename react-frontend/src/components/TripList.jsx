@@ -1,13 +1,24 @@
 import React from 'react';
 import {Divider, Box, List, ListItemButton, ListItemText} from '@mui/material';
-
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle'; 
 
 export default function TripList(props) {
-    const [selectedIndex, setSelectedIndex] = React.useState(1);
+    const [selectedIndex, setselectedIndex] = React.useState(0);
+    const [open, setOpen] = React.useState(false);
 
-    const handleListClick = (event, index) => {
-        setSelectedIndex(index);
-    }
+    const handleClickOpen = (event, index) => {
+      setOpen(true);
+      setselectedIndex(index); 
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
 
     // Make call to API 
     const trip_names = [
@@ -15,13 +26,12 @@ export default function TripList(props) {
         'Trip 2 - Hawaii',
         'Trip 3 - Bahamas'
     ]
-
+    
     return (
         <Box sx={{ width: '100%', maxWidth: '50em'}}>
             <List component='nav'>
                 <ListItemButton
-                  selected={selectedIndex === 0}
-                  onClick={(event) => handleListClick(event, 0)}
+                  onClick={(event) => handleClickOpen(event, 0)}
                 >
                     <ListItemText primary={trip_names[0]} />
                 </ListItemButton>
@@ -29,8 +39,7 @@ export default function TripList(props) {
                 <Divider /> 
 
                 <ListItemButton
-                  selected={selectedIndex === 1}
-                  onClick={(event) => handleListClick(event, 1)}
+                  onClick={(event) => handleClickOpen(event, 1)}
                 >
                     <ListItemText primary={trip_names[1]} />
                 </ListItemButton>
@@ -38,13 +47,36 @@ export default function TripList(props) {
                 <Divider /> 
 
                 <ListItemButton
-                  selected={selectedIndex === 2}
-                  onClick={(event) => handleListClick(event, 2)}
+                  onClick={(event) => handleClickOpen(event, 2)}
                 >
                     <ListItemText primary={trip_names[2]} />
                 </ListItemButton>
             </List>
+
+            <div>
+              <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+              >
+                <DialogTitle id="alert-dialog-title">
+                  {"Use Google's location service?"}
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
+                    {trip_names[selectedIndex]}
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleClose}>Okay</Button>
+                </DialogActions>
+              </Dialog>
+            </div>
+
         </Box>
+
+        
     )
 }
 
