@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, CssBaseline, Box} from '@mui/material';
 
-import TripList from './components/TripList';
+import TripList  from './components/TripList';
 
 function App() {
   return (
