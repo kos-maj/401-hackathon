@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, CssBaseline, Box, Alert} from '@mui/material';
+import {Button, CssBaseline, Box} from '@mui/material';
 
 import TripList from './components/TripList';
 
