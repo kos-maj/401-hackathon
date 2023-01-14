@@ -1,17 +1,20 @@
-import CssBaseline from '@mui/material/CssBaseline';
 import React from 'react';
-import Button from '@mui/material/Button';
+import {Button, CssBaseline, Box} from '@mui/material';
+
+import TripList from './components/TripList';
 
 function App() {
   return (
     <React.Fragment>
       <CssBaseline />
-      {
-        <React.Fragment>
-          <h1>Trip Planner</h1>
-          <Button variant='outlined' color='success'>Add New Trip</Button>
-        </React.Fragment>
-      }
+
+      <Box sx={{m: '2em'}}>
+
+        <h1>Trip Planner</h1>
+        <TripList />
+        <Button sx={{mt: '1em'}} variant='outlined' color='success'>Add New Trip</Button>
+
+      </Box>
     </React.Fragment>
   )
 }
