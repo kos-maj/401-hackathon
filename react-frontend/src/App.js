@@ -2,7 +2,6 @@ import React from 'react';
 import {Button, CssBaseline, Box, Alert} from '@mui/material';
 
 import TripList from './components/TripList';
-import AlertDialog from './components/Popup';
 
 function App() {
   return (
@@ -13,7 +12,6 @@ function App() {
 
         <h1>Trip Planner</h1>
         <TripList />
-        <AlertDialog/>
         <Button sx={{mt: '1em'}} variant='outlined' color='success'>Add New Trip</Button>
 
       </Box>
