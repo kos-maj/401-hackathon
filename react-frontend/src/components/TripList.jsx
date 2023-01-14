@@ -1,12 +1,11 @@
-import React from 'react';
-import Axios from 'axios';
-
+import React, {useState, useEffect} from 'react';
 import {Divider, Box, List, ListItemButton, ListItemText} from '@mui/material';
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@mui/material';
 
 export default function TripList(props) {
-    const [selectedIndex, setselectedIndex] = React.useState(0);
-    const [open, setOpen] = React.useState(false);
+    const [selectedIndex, setselectedIndex] = useState(0);
+    const [open, setOpen] = useState(false);
+    const [trips, setTrips] = useState([]);
 
     const handleClickOpen = (event, index) => {
       setOpen(true);
@@ -17,45 +16,32 @@ export default function TripList(props) {
       setOpen(false);
     };
 
-    // API Calls
-    const axiosInstance = Axios.create({
-      baseURL: 'http://127.0.0.1:8000/api'
-    })
-    // Make call to API 
-    axiosInstance.get('/Trip').then(resp => {
-      console.log(resp);
+    // Make call to API to fetch trip data
+    useEffect(() => {
+      fetch('http://127.0.0.1:8000/api/Trip/', {
+        headers: { "Accept": "application/json" },
+        method: "GET"
+      }).then(response => response.json()).then(tripsData => {
+        setTrips(tripsData);
+      });
     })
 
-    const trip_names = [
-        'Trip 1 - Mexico',
-        'Trip 2 - Hawaii',
-        'Trip 3 - Bahamas'
-    ]
-    
     return (
         <Box sx={{ width: '100%', maxWidth: '50em'}}>
             <List component='nav'>
-                <ListItemButton
-                  onClick={(event) => handleClickOpen(event, 0)}
-                >
-                    <ListItemText primary={trip_names[0]} />
-                </ListItemButton>
-
-                <Divider /> 
-
-                <ListItemButton
-                  onClick={(event) => handleClickOpen(event, 1)}
-                >
-                    <ListItemText primary={trip_names[1]} />
-                </ListItemButton>
-
-                <Divider /> 
-
-                <ListItemButton
-                  onClick={(event) => handleClickOpen(event, 2)}
-                >
-                    <ListItemText primary={trip_names[2]} />
-                </ListItemButton>
+                {trips.map((trip, index) => {
+                    return (
+                      <React.Fragment>
+                          <ListItemButton
+                              onClick={(event) => handleClickOpen(event, index)}
+                          >
+                              <ListItemText primary={trip.trip_name} />
+                          </ListItemButton>
+                          <Divider />
+                      </React.Fragment>
+                    )
+                  })
+                }
             </List>
 
             <div>
@@ -70,7 +56,7 @@ export default function TripList(props) {
                 </DialogTitle>
                 <DialogContent>
                   <DialogContentText id="alert-dialog-description">
-                    {trip_names[selectedIndex]}
+                    {trips.length ? trips[selectedIndex]['trip_name'] : ''}
                   </DialogContentText>
                 </DialogContent>
                 <DialogActions>
