@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import CssBaseline from '@mui/material/CssBaseline';
+import React from 'react';
+import Button from '@mui/material/Button';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <React.Fragment>
+      <CssBaseline />
+      {
+        <React.Fragment>
+          <h1>Trip Planner</h1>
+          <Button variant='outlined' color='success'>Add New Trip</Button>
+        </React.Fragment>
+      }
+    </React.Fragment>
+  )
 }
 
 export default App;
