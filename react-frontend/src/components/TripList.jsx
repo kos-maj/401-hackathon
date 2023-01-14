@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import {Divider, Box, List, ListItemButton, ListItemText} from '@mui/material';
+import {Divider, Box, List, ListItemButton, ListItemText, IconButton, ListItem } from '@mui/material';
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function TripList(props) {
     const [selectedIndex, setselectedIndex] = useState(0);
@@ -32,12 +33,22 @@ export default function TripList(props) {
                 {trips.map((trip, index) => {
                     return (
                       <React.Fragment>
+                      <ListItem
+                        secondaryAction={
+                          <IconButton edge='end'>
+                            <DeleteIcon />
+                          </IconButton>
+                        }
+                        disablePadding
+                      >
                           <ListItemButton
                               onClick={(event) => handleClickOpen(event, index)}
                           >
                               <ListItemText primary={trip.trip_name} />
                           </ListItemButton>
-                          <Divider />
+                      </ListItem>
+
+                      <Divider />
                       </React.Fragment>
                     )
                   })
