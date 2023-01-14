@@ -17,6 +17,16 @@ Email (string, maybe send email button)
 
 
 ## How to Use API from the Backend:
+### Additional Packages Needed for Accessing the APIs
+To add CORS support to the Django backend, we need to install an extra package, please follow the following command to install:
+1. For Windows:
+~~~
+pip install django-cors-headers
+~~~
+2. For macOS:
+~~~
+pip3 install django-cors-headers
+~~~
 ### Go to the API Page
 1. first, run the server, then go to the link that termial return (usually http://127.0.0.1:8000/, so i will use this link as an example below)
 2. go to http://127.0.0.1:8000/admin/
