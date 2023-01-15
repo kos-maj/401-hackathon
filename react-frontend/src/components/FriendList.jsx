@@ -4,11 +4,11 @@ import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogT
 import DeleteIcon from '@mui/icons-material/Delete';
 
 
-export default function TripList(props) {
-    const TRIP_ENDPOINT = 'http://127.0.0.1:8000/api/Trip/';
+export default function FriendList(props) {
+    const FRIEND_ENDPOINT = 'http://127.0.0.1:8000/api/Friend/';
     const [selectedIndex, setselectedIndex] = useState(0);
     const [open, setOpen] = useState(false);
-    const [trips, setTrips] = useState([]);
+    const [friends, setFriends] = useState([]);
 
     const handleClickOpen = (event, index) => {
       setOpen(true);
@@ -19,33 +19,33 @@ export default function TripList(props) {
       setOpen(false);
     };
 
-    const handleClickDelete = (event, trip_id) => {
-      // Make request to API to delete trip with current ID
-      fetch(`${TRIP_ENDPOINT}${trip_id}/`, { method: 'DELETE' });
+    const handleClickDelete = (event, friend_id) => {
+      // Make request to API to delete friend with current ID
+      fetch(`${FRIEND_ENDPOINT}${friend_id}/`, { method: 'DELETE' });
     }
 
-    // Fetch trip data from API
+    // Fetch friend data from API
     useEffect(() => {
-      fetch(TRIP_ENDPOINT, {
+      fetch(FRIEND_ENDPOINT, {
         headers: { "Accept": "application/json" },
         method: "GET"
-      }).then(response => response.json()).then(tripsData => {
-        setTrips(tripsData);
+      }).then(response => response.json()).then(friendsData => {
+        setFriends(friendsData);
       });
     })
 
-    // console.log(trips); 
+    // console.log(friends); 
 
     return (
         <Box sx={{ width: '100%', maxWidth: '50em'}}>
-            <h3>Trip List</h3>
+            <h3>Friend List</h3>
             <List component='nav'>
-                {trips.map((trip, index) => {
+                {friends.map((friend, index) => {
                     return (
                       <React.Fragment>
                       <ListItem
                         secondaryAction={
-                          <IconButton edge='end' onClick={(event) => handleClickDelete(event, trip.TID)}>
+                          <IconButton edge='end' onClick={(event) => handleClickDelete(event, friend.FID)}>
                             <DeleteIcon />
                           </IconButton>
                         }
@@ -54,7 +54,7 @@ export default function TripList(props) {
                           <ListItemButton
                               onClick={(event) => handleClickOpen(event, index)}
                           >
-                              <ListItemText primary={trip.trip_name} />
+                              <ListItemText primary={friend.friend_name} />
                           </ListItemButton>
                       </ListItem>
 
@@ -77,16 +77,13 @@ export default function TripList(props) {
                 </DialogTitle>
                 <DialogContent>
                   <DialogContentText id="alert-dialog-description">
-                    Trip Name: {trips.length ? trips[selectedIndex]['trip_name'] : ''}
+                    Friend Name: {friends.length ? friends[selectedIndex]['friend_name'] : ''}
                   </DialogContentText>
                   <DialogContentText id="alert-dialog-description">
-                    Start Date: {trips.length ? trips[selectedIndex]['start_date_time'] : ''}
+                    Friend Email: {friends.length ? friends[selectedIndex]['friend_email'] : ''}
                   </DialogContentText>
                   <DialogContentText id="alert-dialog-description">
-                    Duration (Days): {trips.length ? trips[selectedIndex]['duration'] : ''}
-                  </DialogContentText>
-                  <DialogContentText id="alert-dialog-description">
-                    Activities: {trips.length ? trips[selectedIndex]['activities'] : ''}
+                    Friend Age: {friends.length ? friends[selectedIndex]['friend_age'] : ''}
                   </DialogContentText>
                 </DialogContent>
                 <DialogActions>
