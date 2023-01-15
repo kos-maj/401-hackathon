@@ -4,6 +4,7 @@ import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogT
 import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function TripList(props) {
+    const TRIP_ENDPOINT = 'http://127.0.0.1:8000/api/Trip/';
     const [selectedIndex, setselectedIndex] = useState(0);
     const [open, setOpen] = useState(false);
     const [trips, setTrips] = useState([]);
@@ -19,12 +20,12 @@ export default function TripList(props) {
 
     const handleClickDelete = (event, trip_id) => {
       // Make request to API to delete trip with current ID
-      console.log(`Delete pressed on trip with id ${trip_id}`);
+      fetch(`${TRIP_ENDPOINT}${trip_id}/`, { method: 'DELETE' });
     }
 
-    // Make call to API to fetch trip data
+    // Fetch trip data from API
     useEffect(() => {
-      fetch('http://127.0.0.1:8000/api/Trip/', {
+      fetch(TRIP_ENDPOINT, {
         headers: { "Accept": "application/json" },
         method: "GET"
       }).then(response => response.json()).then(tripsData => {
