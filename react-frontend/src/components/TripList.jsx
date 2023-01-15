@@ -34,6 +34,8 @@ export default function TripList(props) {
       });
     })
 
+    // console.log(trips); 
+
     return (
         <Box sx={{ width: '100%', maxWidth: '50em'}}>
             <List component='nav'>
@@ -74,7 +76,13 @@ export default function TripList(props) {
                 </DialogTitle>
                 <DialogContent>
                   <DialogContentText id="alert-dialog-description">
-                    {trips.length ? trips[selectedIndex]['trip_name'] : ''}
+                    Trip Name: {trips.length ? trips[selectedIndex]['trip_name'] : ''}
+                  </DialogContentText>
+                  <DialogContentText id="alert-dialog-description">
+                    Duration (Days): {trips.length ? trips[selectedIndex]['duration'] : ''}
+                  </DialogContentText>
+                  <DialogContentText id="alert-dialog-description">
+                    Activities: {trips.length ? trips[selectedIndex]['activities'] : ''}
                   </DialogContentText>
                 </DialogContent>
                 <DialogActions>
@@ -84,7 +92,5 @@ export default function TripList(props) {
             </div>
 
         </Box>
-
-        
     )
 }
