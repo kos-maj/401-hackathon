@@ -5,7 +5,7 @@ class Trip(models.Model):
     TID = models.IntegerField(primary_key=True)
     trip_name = models.CharField(max_length = 180)
     duration = models.IntegerField()
-    start_date_time = models.CharField(max_length = 180)
+    start_date_time = models.DateTimeField()
     activities = models.CharField(max_length=180)
     def __str__(self):
         return self.trip_name
