@@ -9,6 +9,9 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
+  const [trip_name, setName] = React.useState(null);
+  const [duration, setDuration] = React.useState(null);
+  const [activity, setActivity] = React.useState(null);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -16,7 +19,17 @@ export default function FormDialog() {
 
   const handleClose = () => {
     setOpen(false);
+    setName(null);
+    setDuration(null);
+    setActivity(null);
   };
+
+  const handleSubmit = () => {
+    // TODO: POST request to API creating new trip
+    if(trip_name !== null && duration !== null && activity !== null) {
+        console.log(`new trip -> ${trip_name}, ${duration}, ${activity}`)
+    }
+  }
 
   return (
     <div>
@@ -36,6 +49,7 @@ export default function FormDialog() {
             label="Trip Name"
             fullWidth
             variant="standard"
+            onChange={e => { setName(e.target.value) }}
           />
           <TextField
             autoFocus
@@ -44,6 +58,7 @@ export default function FormDialog() {
             label="Duration (Days)"
             fullWidth
             variant="standard"
+            onChange={e => { setDuration(e.target.value) }}
           />
           <TextField
             autoFocus
@@ -52,11 +67,15 @@ export default function FormDialog() {
             label="Activities"
             fullWidth
             variant="standard"
+            onChange={e => { setActivity(e.target.value) }}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Confirm</Button>
+          <Button onClick={() => {
+            handleSubmit(); 
+            handleClose();
+          }}>Confirm</Button>
         </DialogActions>
       </Dialog>
     </div>
