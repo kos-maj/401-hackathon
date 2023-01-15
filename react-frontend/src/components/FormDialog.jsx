@@ -7,6 +7,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
+
 export default function FormDialog() {
   const TRIP_ENDPOINT = 'http://127.0.0.1:8000/api/Trip/'
 
@@ -15,6 +16,7 @@ export default function FormDialog() {
   const [trip_name, setName] = React.useState(null);
   const [duration, setDuration] = React.useState(null);
   const [activity, setActivity] = React.useState(null);
+  const [date, setDate] = React.useState(null);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -25,6 +27,7 @@ export default function FormDialog() {
     setName(null);
     setDuration(null);
     setActivity(null);
+    setDate(null);
   };
 
     // Get max PID
@@ -51,7 +54,7 @@ export default function FormDialog() {
       "TID": tid + 1,
       "trip_name": trip_name,
       "duration": duration,
-      "start_date_time": '2020-03-11T13:33:00Z',
+      "start_date_time": date,
       "activities": activity
     })
 
@@ -88,6 +91,15 @@ export default function FormDialog() {
           <TextField
             autoFocus
             margin="dense"
+            id="date"
+            label="Start Date"
+            fullWidth
+            variant="standard"
+            onChange={e => { setDate(e.target.value) }}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
             id="duration"
             label="Duration (Days)"
             fullWidth
@@ -103,6 +115,8 @@ export default function FormDialog() {
             variant="standard"
             onChange={e => { setActivity(e.target.value) }}
           />
+
+          
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
