@@ -43,7 +43,7 @@ export default function FormDialog() {
   const handleSubmit = () => {
     // TODO: POST request to API creating new trip
     if(trip_name !== null && duration !== null && activity !== null) {
-        console.log(`new trip -> ${trip_name}, ${duration}, ${activity}`)
+        console.log(`new trip -> ${trip_name}, ${date}, ${duration}, ${activity}`)
     }
 
     const config ={ headers: {

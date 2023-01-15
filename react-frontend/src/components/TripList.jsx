@@ -79,6 +79,9 @@ export default function TripList(props) {
                     Trip Name: {trips.length ? trips[selectedIndex]['trip_name'] : ''}
                   </DialogContentText>
                   <DialogContentText id="alert-dialog-description">
+                    Start Date: {trips.length ? trips[selectedIndex]['start_date_time'] : ''}
+                  </DialogContentText>
+                  <DialogContentText id="alert-dialog-description">
                     Duration (Days): {trips.length ? trips[selectedIndex]['duration'] : ''}
                   </DialogContentText>
                   <DialogContentText id="alert-dialog-description">
