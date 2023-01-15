@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState, useEffect} from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -8,7 +8,10 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 export default function FormDialog() {
+  const TRIP_ENDPOINT = 'http://127.0.0.1:8000/api/Trip/'
+
   const [open, setOpen] = React.useState(false);
+  const [tid, setTid] = React.useState(null);
   const [trip_name, setName] = React.useState(null);
   const [duration, setDuration] = React.useState(null);
   const [activity, setActivity] = React.useState(null);
@@ -24,11 +27,42 @@ export default function FormDialog() {
     setActivity(null);
   };
 
+    // Get max PID
+    useEffect(() => {
+      fetch(TRIP_ENDPOINT, {
+        headers: { "Accept": "application/json" },
+        method: "GET"
+      }).then(response => response.json()).then(tripsData => {
+        setTid(tripsData.at(-1).TID);
+      });
+    })
+
   const handleSubmit = () => {
     // TODO: POST request to API creating new trip
     if(trip_name !== null && duration !== null && activity !== null) {
         console.log(`new trip -> ${trip_name}, ${duration}, ${activity}`)
     }
+
+    const config ={ headers: {
+      "Accept": "application/json"
+    }}
+
+    const body = JSON.stringify({
+      "TID": tid + 1,
+      "trip_name": trip_name,
+      "duration": duration,
+      "start_date_time": '2020-03-11T13:33:00Z',
+      "activities": activity
+    })
+
+    fetch(TRIP_ENDPOINT, {
+      headers: { 
+        'Accept': 'application/json',
+        'Content-Type': 'application/json' 
+    },
+      body: body, 
+      method: "POST"
+    })
   }
 
   return (
