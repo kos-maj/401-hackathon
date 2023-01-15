@@ -17,6 +17,11 @@ export default function TripList(props) {
       setOpen(false);
     };
 
+    const handleClickDelete = (event, trip_id) => {
+      // Make request to API to delete trip with current ID
+      console.log(`Delete pressed on trip with id ${trip_id}`);
+    }
+
     // Make call to API to fetch trip data
     useEffect(() => {
       fetch('http://127.0.0.1:8000/api/Trip/', {
@@ -35,7 +40,7 @@ export default function TripList(props) {
                       <React.Fragment>
                       <ListItem
                         secondaryAction={
-                          <IconButton edge='end'>
+                          <IconButton edge='end' onClick={(event) => handleClickDelete(event, trip.TID)}>
                             <DeleteIcon />
                           </IconButton>
                         }
