@@ -1,7 +1,8 @@
 import React from 'react';
-import {Button, CssBaseline, Box} from '@mui/material';
+import {CssBaseline, Box} from '@mui/material';
 
 import TripList  from './components/TripList';
+import FormDialog from './components/FormDialog';
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
 
         <h1>Trip Planner</h1>
         <TripList />
-        <Button sx={{mt: '1em'}} variant='outlined' color='success'>Add New Trip</Button>
+        <FormDialog />
 
       </Box>
     </React.Fragment>

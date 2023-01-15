@@ -3,6 +3,7 @@ import {Divider, Box, List, ListItemButton, ListItemText, IconButton, ListItem }
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
+
 export default function TripList(props) {
     const TRIP_ENDPOINT = 'http://127.0.0.1:8000/api/Trip/';
     const [selectedIndex, setselectedIndex] = useState(0);
