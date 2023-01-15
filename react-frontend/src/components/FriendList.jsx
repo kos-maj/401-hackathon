@@ -8,6 +8,7 @@ export default function FriendList(props) {
     const FRIEND_ENDPOINT = 'http://127.0.0.1:8000/api/Friend/';
     const [selectedIndex, setselectedIndex] = useState(0);
     const [open, setOpen] = useState(false);
+    const [invited, setInviteOpen] = useState(false);
     const [friends, setFriends] = useState([]);
 
     const handleClickOpen = (event, index) => {
@@ -23,6 +24,14 @@ export default function FriendList(props) {
       // Make request to API to delete friend with current ID
       fetch(`${FRIEND_ENDPOINT}${friend_id}/`, { method: 'DELETE' });
     }
+
+    const handleClickInviteOpen = (event, index) => {
+      setInviteOpen(true);
+    };
+  
+    const handleInviteClose = () => {
+      setInviteOpen(false);
+    };
 
     // Fetch friend data from API
     useEffect(() => {
@@ -45,9 +54,9 @@ export default function FriendList(props) {
                       <React.Fragment>
                       <ListItem
                         secondaryAction={
-                          <IconButton edge='end' onClick={(event) => handleClickDelete(event, friend.FID)}>
-                            <DeleteIcon />
-                          </IconButton>
+                          <Button edge='end' variant="contained" color="success" onClick={(event) => handleClickInviteOpen(event, index)}>
+                            Invite
+                          </Button>
                         }
                         disablePadding
                       >
@@ -88,6 +97,27 @@ export default function FriendList(props) {
                 </DialogContent>
                 <DialogActions>
                   <Button onClick={handleClose}>Okay</Button>
+                </DialogActions>
+              </Dialog>
+            </div>
+
+            <div>
+              <Dialog
+                open={invited}
+                onClose={handleInviteClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+              >
+                <DialogTitle id="alert-dialog-title">
+                  {"Success"}
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
+                    Invitation Sent! 
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleInviteClose}>Okay</Button>
                 </DialogActions>
               </Dialog>
             </div>
